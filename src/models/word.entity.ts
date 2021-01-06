@@ -1,32 +1,54 @@
-import {Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import {Group} from './group.entity';
+import {BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import {GroupEntity} from './group.entity';
 
-@Entity()
-export class Word {
-    @PrimaryGeneratedColumn()
+@Entity({name: 'words'})
+export class WordEntity extends BaseEntity {
+    @PrimaryGeneratedColumn({
+        name: 'word_id'
+    })
     wordId: number;
 
-    @Column()
+    @Column({
+        name: 'original_language'
+    })
     originalLanguage: string;
 
-    @Column()
+    @Column({
+        name: 'target_language'
+    })
     targetLanguage: string;
 
-    @Column()
+    @Column({
+        name: 'original'
+    })
     original: string;
 
-    @Column()
+    @Column({
+        name: 'target'
+    })
     target: string;
 
-    @Column()
+    @Column({
+        name: 'comment'
+    })
     comment: string;
 
-    @CreateDateColumn()
+    @CreateDateColumn({
+        name: 'created_at'
+    })
     createdAt: Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({
+        name: 'updated_at'
+    })
     updatedAt: Date;
 
-    @ManyToOne(() => Group, group => group.words)
-    group: Group;
+    // @ManyToOne(() => GroupEntity, group => group.words, {
+    //     cascade: false,
+    //     eager: false,
+    // })
+    // @JoinColumn({
+    //     name: 'group_id'
+    // })
+    // group: GroupEntity;
 }

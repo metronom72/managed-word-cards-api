@@ -1,16 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { LessonsController } from './lessons/lessons.controller';
-import { LessonsService } from './lessons/lessons.service';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import {configService} from './config/config.service';
+import {LessonsModule} from './modules/lessons/lessons.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(configService.getTypeOrmConfig())
+    TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
+    LessonsModule
   ],
-  controllers: [AppController, LessonsController],
-  providers: [AppService, LessonsService],
 })
 export class AppModule {}

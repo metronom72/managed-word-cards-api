@@ -1,27 +1,59 @@
-import {Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import {Word} from './word.entity';
-import {Lesson} from './lesson.entity';
+import {
+    BaseEntity,
+    Column,
+    CreateDateColumn,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from 'typeorm';
+import {WordEntity} from './word.entity';
+import {LessonEntity} from './lesson.entity';
 
-@Entity()
-export class Group {
-    @PrimaryGeneratedColumn()
+@Entity({name: 'groups'})
+export class GroupEntity extends BaseEntity {
+    @PrimaryGeneratedColumn({
+        name: 'group_id'
+    })
     groupId: number;
 
-    @Column()
+    @Column({
+        name: 'title'
+    })
     title: string;
 
-    @Column()
+    @Column({
+        name: 'comment'
+    })
     comment: string;
 
-    @CreateDateColumn()
+    @CreateDateColumn({
+        name: 'created_at'
+    })
     createdAt: Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({
+        name: 'updated_at'
+    })
     updatedAt: Date;
 
-    @OneToMany(() => Word, word => word.group)
-    words: Word[];
-
-    @ManyToOne(() => Lesson, lesson => lesson.groups)
-    lesson: Lesson
+    // @OneToMany(() => WordEntity, word => word.group, {
+    //     cascade: true,
+    //     eager: true,
+    // })
+    // @JoinColumn({
+    //     name: 'word_id'
+    // })
+    // words: WordEntity[];
+    //
+    // @ManyToOne(() => LessonEntity, lesson => lesson.groups, {
+    //     cascade: false,
+    //     eager: false,
+    // })
+    // @JoinColumn({
+    //     name: 'lesson_id'
+    // })
+    // lesson: LessonEntity
 }

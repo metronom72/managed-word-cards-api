@@ -1,30 +1,53 @@
-import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import {BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 import {StatusEnum} from '../shared/constants';
-import {Group} from './group.entity';
+import {GroupEntity} from './group.entity';
 
-@Entity()
-export class Lesson {
-    @PrimaryGeneratedColumn()
+@Entity({name: 'lessons'})
+export class LessonEntity extends BaseEntity {
+    @PrimaryGeneratedColumn({
+        name: 'lesson_id'
+    })
     lessonId: number;
 
-    @Column()
+    @Column({
+        name: 'original_language'
+    })
     originalLanguage: string;
 
-    @Column()
+    @Column({
+        name: 'target_language'
+    })
     targetLanguage: string;
 
-    @Column()
+    @Column({
+        name: 'title'
+    })
+    title: string;
+
+    @Column({
+        name: 'lesson_status'
+    })
     lessonStatus: StatusEnum;
 
-    @Column()
+    @Column({
+        nullable: true,
+        name: 'comment'
+    })
     comment: string;
 
-    @CreateDateColumn()
+    @CreateDateColumn({
+        name: 'created_at'
+    })
     createdAt: Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({
+        name: 'updated_at'
+    })
     updatedAt: Date;
 
-    @OneToMany(() => Group, group => group.lesson)
-    groups: Group[];
+    // @OneToMany(() => GroupEntity, group => group.lesson, {
+    //     cascade: true,
+    //     eager: true,
+    // })
+    // groups: GroupEntity[];
 }

@@ -1,19 +1,40 @@
 import {CreateGroupDto} from './group.dto';
 import {CommonDto, CreateCommonDto} from './common.dto';
 import {StatusEnum} from '../shared/constants';
+import {IsEnum, IsNotEmpty} from 'class-validator';
 
-export interface CreateLessonDto extends CreateCommonDto {
+export class CreateLessonDto extends CreateCommonDto {
+    @IsNotEmpty()
     originalLanguage: string;
+
+    @IsNotEmpty()
     targetLanguage: string;
+
+    @IsNotEmpty()
     title: string;
-    groups: CreateGroupDto[];
-    status: StatusEnum;
+
+    // @IsNotEmpty()
+    // groups: CreateGroupDto[];
+
+    @IsEnum(StatusEnum)
+    @IsNotEmpty()
+    lessonStatus: StatusEnum;
 }
 
-export interface LessonDto extends CommonDto {
+export class LessonDto extends CommonDto {
+    @IsNotEmpty()
     originalLanguage: string;
+
+    @IsNotEmpty()
     targetLanguage: string;
+
+    @IsNotEmpty()
     title: string;
-    groups: CreateGroupDto[];
-    status: StatusEnum;
+
+    // @IsNotEmpty()
+    // groups: CreateGroupDto[];
+
+    @IsEnum(StatusEnum)
+    @IsNotEmpty()
+    lessonStatus: StatusEnum;
 }
