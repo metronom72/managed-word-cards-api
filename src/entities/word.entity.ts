@@ -43,12 +43,12 @@ export class WordEntity extends BaseEntity {
     })
     updatedAt: Date;
 
-    // @ManyToOne(() => GroupEntity, group => group.words, {
-    //     cascade: false,
-    //     eager: false,
-    // })
-    // @JoinColumn({
-    //     name: 'group_id'
-    // })
-    // group: GroupEntity;
+    @ManyToOne(() => GroupEntity, group => group.words, {
+        cascade: false,
+        eager: false,
+    })
+    @JoinColumn({
+        name: 'group_id'
+    })
+    group: GroupEntity;
 }

@@ -45,9 +45,9 @@ export class LessonEntity extends BaseEntity {
     })
     updatedAt: Date;
 
-    // @OneToMany(() => GroupEntity, group => group.lesson, {
-    //     cascade: true,
-    //     eager: true,
-    // })
-    // groups: GroupEntity[];
+    @OneToMany(() => GroupEntity, group => group.lesson, {
+        cascade: true,
+        eager: true,
+    })
+    groups: GroupEntity[];
 }

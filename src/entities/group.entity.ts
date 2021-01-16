@@ -39,21 +39,21 @@ export class GroupEntity extends BaseEntity {
     })
     updatedAt: Date;
 
-    // @OneToMany(() => WordEntity, word => word.group, {
-    //     cascade: true,
-    //     eager: true,
-    // })
-    // @JoinColumn({
-    //     name: 'word_id'
-    // })
-    // words: WordEntity[];
-    //
-    // @ManyToOne(() => LessonEntity, lesson => lesson.groups, {
-    //     cascade: false,
-    //     eager: false,
-    // })
-    // @JoinColumn({
-    //     name: 'lesson_id'
-    // })
-    // lesson: LessonEntity
+    @OneToMany(() => WordEntity, word => word.group, {
+        cascade: true,
+        eager: true,
+    })
+    @JoinColumn({
+        name: 'word_id'
+    })
+    words: WordEntity[];
+
+    @ManyToOne(() => LessonEntity, lesson => lesson.groups, {
+        cascade: false,
+        eager: false,
+    })
+    @JoinColumn({
+        name: 'lesson_id'
+    })
+    lesson: LessonEntity
 }
